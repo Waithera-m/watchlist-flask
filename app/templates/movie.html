@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        {% if id %}
-        <title>{{id}}</title>
-        {% else %}
-        <title>2589</title>
-        {% endif %}
-    </head>
-    <body>
-        <h1>Hello Movie {{id}}</h1>
-    </body>
-</html>
+{% extends 'base.html'%}
+
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    {% if id %}
+    <title>{{id}}</title>
+    {% else %}
+    <title>2589</title>
+    {% endif %}
+</head>
+<h1>Hello Movie {{id}}</h1>
+{% endblock %}
+
