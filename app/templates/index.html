@@ -1,12 +1,19 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
 
+<!--Styles block-->
+<!--super() function tells Jinja not to override any code that is defined in the block-->
+<!--url_for() function creates a link to the static file-->
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='CSS/index.css')}}">
+{% endblock %}
 <!-- Content block -->
 {% block content %}
 <div class="row">
     <div class="col-md-12">
         <!-- Popular movie -->
-        <h3 style = "text-align: center;"> Popular Movies</h3>
+        <h3>Popular Movies</h3>
         <div>
             {{ macro.displayMovieList(popular)}}
         </div>
@@ -15,7 +22,7 @@
 <div class="row">
     <div class="col-md-12">
         <!-- Upcoming movie  -->
-        <h3 style = "text-align: center;"> Upcoming Movies </h3>
+        <h3>Upcoming Movies</h3>
         <div>
             {{ macro.displayMovieList(upcoming)}}
         </div>
@@ -24,18 +31,13 @@
 <div class="row">
     <div class="col-md-12">
         <!-- Now showing movie -->
-        <h3 style = "text-align: center;">Now Showing</h3>
+        <h3>Now Showing</h3>
         <div>
             {{ macro.displayMovieList(now_showing)}}
         </div>
     </div>
 </div>
-
-
-
-
-
-{% endblock%}
+{% endblock %}
 
 
 
