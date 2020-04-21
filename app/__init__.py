@@ -13,6 +13,8 @@ app.config.from_pyfile('config.py')
 
 from app import views
 
+from app import error
+
 #most flask extensions have to be initialized in this file before they can be used
 from flask_bootstrap import Bootstrap
 
