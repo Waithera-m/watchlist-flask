@@ -5,7 +5,7 @@
             <img src="{{ movie.poster }}" alt="{{ movie.title }} poster" class="img-responsive">
             <div class="text-center">
                 <a style = "font-size:medium" href="/movie/{{movie.id}}">
-                    {{ movie.title|truncate(15)}}</a>
+                    {{ movie.title|truncate(10)}}</a>
                 </div>
         </div>
     {% endfor %}
