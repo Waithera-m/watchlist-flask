@@ -1,3 +1,4 @@
+{% import 'macros.html' as macro%}
 {% extends 'base.html'%}
 
 {% block styles %}
@@ -21,6 +22,19 @@
             <p class="ratings"> <b> {{ movie.vote_average }}</b> - <i>{{ movie.vote_count}} votes </i> </p>
             <a class="ratings" href="/movie/review/new/{{movie.id}}">Write a new review</a>
         </div>
+    </div>
+    <div class="row">
+
+        <h1 style="text-align: center;">Reviews</h1>
+        <hr>
+        {% if reviews %}
+            {{macro.displayReviews(reviews)}}
+        {% else%}
+            <h3>This movie has no reviews </h3>
+
+            <a class="btn btn-primary btn-lg text-center" href="/movie/review/new/{{movie.id}}"> Write a new review</a>
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}
