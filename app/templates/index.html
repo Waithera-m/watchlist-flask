@@ -10,6 +10,20 @@
 {% endblock %}
 <!-- Content block -->
 {% block content %}
+<!--create search form-->
+<div class="container">
+    <form>
+        <input type="text" name="movie_query" placeholder="Search for a Movie" class="form-control">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-4">
+                <input type="submit"  value="Submit" class="btn btn-default">
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        
+    </form>
+</div>
 <div class="row">
     <div class="col-md-12">
         <!-- Popular movie -->
