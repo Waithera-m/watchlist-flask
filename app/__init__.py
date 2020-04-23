@@ -24,6 +24,10 @@ def create_app(config_name):
     from .Main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+    #set configuration
+    from .request import configure_request
+    configure_request(app)
+
     return app
 
     
