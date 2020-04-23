@@ -1,7 +1,7 @@
 from app import app
 import urllib.request,json
 
-from .models import movie
+from .models import Movie
 
 #First, we handle the imports. We import the flask application instance. We then import the Python urllib.request module that will help us create a connection to our API URL and send a request and json modules that will format the JSON response to a Python dictionary.
 
