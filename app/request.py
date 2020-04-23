@@ -4,7 +4,6 @@ from .models import Movie
 
 #First, we handle the imports. We import the flask application instance. We then import the Python urllib.request module that will help us create a connection to our API URL and send a request and json modules that will format the JSON response to a Python dictionary.
 
-Movie = Movie
 
 #get api key from it
 api_key = None
@@ -17,7 +16,7 @@ def configure_request(app):
     '''
     function replaces the values of the api_key and base_url variables with the values defined in the application configuration objects
     '''
-    global api_key,base_url
+    global api_key, base_url
     api_key = app.config['MOVIE_API_KEY']
     base_url = app.config['MOVIE_API_BASE_URL']
 

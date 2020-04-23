@@ -15,6 +15,7 @@ def create_app(config_name):
 
     #app configurations
     app.config.from_object(config_options[config_name])
+    
 
     #initialize flask extensions
     bootstrap.init_app(app)
