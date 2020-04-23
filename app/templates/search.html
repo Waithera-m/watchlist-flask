@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+
+{% block content %}
+    <div class = "container">
+        <div class="row">
+            <!--count filter alias length returns number of items in a container, I think I should use wordcount instead-->
+            <h3 style = "text-align: center;">Found {{movies | count}} Matches</h3>
+            <hr>
+            <ul>
+                {{macro.displayMovieList(movies)}}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

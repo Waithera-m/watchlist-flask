@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+    <div clas="container">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <img src="{{movie.poster}}" alt="{{movie.title}}" class="img-responsive">
+        </div>
+        <div class="col-md-4">
+            {{wtf.quick_form(review_form)}}
+            <!--wtf.quick_form() function takes in a Flask-WTF form object and renders it with bootstrap styling-->
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+{% endblock %}
