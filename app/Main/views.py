@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, url_for
+from flask_login import login_required
 #import blueprint
 from . import main
 
@@ -68,6 +69,8 @@ def search(movie_name):
     return render_template('search.html', movies = searched_movies, title = title)
 
 @main.route('/movie/review/new/<int:id>', methods = ['GET','POST'])
+@login_required
+#decorator ensures that only authenticated users can post moview reviews
 def new_review(id):
 
     '''

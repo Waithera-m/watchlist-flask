@@ -2,8 +2,13 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from config import config_options
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+#flask_login facilitates user authentication system management
 
-
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+#login_manager.session_protection provides different security levels. Strong security level monitors the changes in a user's request header and logs them out.
+login_manager.login_view = 'auth.login'
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 
@@ -23,6 +28,7 @@ def create_app(config_name):
     #initialize flask extensions
     bootstrap.init_app(app)
     db.init_app(app)
+    login_manager.init_app(app)
 
     #register blueprint
 

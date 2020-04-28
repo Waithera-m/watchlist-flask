@@ -1,5 +1,15 @@
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
+from flask_login import UserMixin
+from . import login_manager
+
+@login_manager.user_loader
+def load_user(user_id):
+
+    '''
+    function queries and returns user with a give id
+    '''
+    return User.query.get(int(user_id))
 
 class Movie:
 
@@ -66,7 +76,7 @@ class Review:
 
         return response
 
-class User(db.Model):
+class User(UserMixin,db.Model):
 
     '''
     Function facilitates the creation of new users
@@ -77,12 +87,16 @@ class User(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     #create name column
     username = db.Column(db.String(255))
-    #function facilitates debugging
+    email = db.Column(db.String(255),unique = True,index = True)
     #create connection between roles and users
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     #a Foreign key is a field in one table that references a primary key in another table
     pass_secure = db.Column(db.String(255))
     #pasword column
+    #function facilitates debugging
+    def __repr__(self):
+        return f'User {self.username}'
+    
     @property
     def password (self):
 
@@ -91,8 +105,8 @@ class User(db.Model):
         '''
         raise AttributeError('You cannot read the password attribute')
 
-    @property.setter
-    def password(self,password):
+    @password.setter
+    def password(self, password):
 
         '''
         Function generates and passes hashed password
@@ -106,8 +120,7 @@ class User(db.Model):
         '''
         return check_password_hash(self.pass_secure,password)
 
-    def __repr__(self):
-        return f'User {self.username}'
+    
 
 
     
