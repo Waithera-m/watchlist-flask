@@ -1,3 +1,8 @@
 {
-    "python.pythonPath": "virtual/bin/python3.8"
+    "python.pythonPath": "virtual/bin/python3.8",
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pylamaEnabled": false,
+    "python.linting.pylintArgs": ["--load-plugins", "pylint-flask"]
 }

@@ -8,7 +8,8 @@ class Config:
     MOVIE_API_BASE_URL = 'https://api.themoviedb.org/3/movie/{}?api_key={}'
     MOVIE_API_KEY = os.environ.get('MOVIE_API_KEY')
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mary:mawanji1992@localhost/watchlist'
+    P_KEY = os.environ.get('P_KEY')
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mary:{}@localhost/watchlist'.format(P_KEY)
     #os.environ function gets users environment
 
 

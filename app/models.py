@@ -1,3 +1,6 @@
+from . import db
+from werkzeug.security import generate_password_hash,check_password_hash
+
 class Movie:
 
     '''
@@ -62,3 +65,65 @@ class Review:
                 response.append(review)
 
         return response
+
+class User(db.Model):
+
+    '''
+    Function facilitates the creation of new users
+    '''
+    #give proper name to tables in database
+    __tablename__ = 'users'
+    #create id table column
+    id = db.Column(db.Integer,primary_key=True)
+    #create name column
+    username = db.Column(db.String(255))
+    #function facilitates debugging
+    #create connection between roles and users
+    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    #a Foreign key is a field in one table that references a primary key in another table
+    pass_secure = db.Column(db.String(255))
+    #pasword column
+    @property
+    def password (self):
+
+        '''
+        Function blocks access to password property
+        '''
+        raise AttributeError('You cannot read the password attribute')
+
+    @property.setter
+    def password(self,password):
+
+        '''
+        Function generates and passes hashed password
+        '''
+        self.pass_secure = generate_password_hash(password)
+    
+    def verify_password(self,password):
+
+        '''
+        Function takes password, hashes it, and compares it to hashed password
+        '''
+        return check_password_hash(self.pass_secure,password)
+
+    def __repr__(self):
+        return f'User {self.username}'
+
+
+    
+
+class Role(db.Model):
+
+    '''
+    Function to determine the level of access that users have
+    '''
+    __tablename__ = 'roles'
+
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(255))
+    users = db.relationship('User',backref = 'role',lazy="dynamic")
+    #The first argument is the class that we are referencing which is User. Next backref allows us to access and set our User class. We give it the value of role now because when we want to get the role of a user instance we can just run user.role. Lazy parameter is how SQLAlchemy will load our projects. The lazy option is our objects will be loaded on access and filtered before returning (Moringa,2017).
+
+    def __repr__(self):
+        return f'User {self.name}'
+
