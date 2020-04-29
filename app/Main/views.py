@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, abort
 from flask_login import login_required
 #import blueprint
 from . import main
@@ -6,7 +6,7 @@ from . import main
 from ..request import get_movies, get_movie, search_movie
 
 #import Review and ReviewForm classes
-from ..models import Review
+from ..models import Review,User
 from .forms import ReviewForm
 Review = Review
 
@@ -89,3 +89,16 @@ def new_review(id):
 
     title = f'{movie.title} review'
     return render_template('new_review.html',title = title, review_form = form, movie = movie)
+
+@main.route('/user/<uname>')
+def profile(uname):
+
+    '''
+    Function returns user's profile page if a user exits or return 404 error if the user does not exist in the data base
+    '''
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+    
+    return render_template("profile/profile.html", user = user)
