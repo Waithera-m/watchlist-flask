@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 #Imported classes facilitate the creation of input and textare fields and submit button
+from flask_wtf.file import FileField,FileAllowed,FileRequired
 from wtforms import StringField, TextAreaField, SubmitField
 #Imported class facilitates form validation
 from wtforms.validators import Required
@@ -25,3 +26,7 @@ class UpdateProfile(FlaskForm):
     '''
     bio = TextAreaField('So tell us everything...',validators = [Required()])
     submit = SubmitField('Add Bio')
+
+class UploadFile(FlaskForm):
+
+    photo = FileField(validators=[FileRequired(),FileAllowed(['jpg','jpeg','png'])])
