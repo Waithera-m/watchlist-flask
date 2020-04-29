@@ -3,11 +3,13 @@ from flask_login import login_required
 #import blueprint
 from . import main
 
+from .. import db
+
 from ..request import get_movies, get_movie, search_movie
 
 #import Review and ReviewForm classes
 from ..models import Review,User
-from .forms import ReviewForm
+from .forms import ReviewForm,UpdateProfile
 Review = Review
 
 # Views
@@ -102,3 +104,27 @@ def profile(uname):
         abort(404)
     
     return render_template("profile/profile.html", user = user)
+
+@main.route('/user/<uname>/update',methods=['GET','POST'])
+@login_required
+def update_profile(uname):
+
+    '''
+    View function gets and returns profile form and once the form is validated, the function returns profile view
+    '''
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+    
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+        
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname=user.username))
+    
+    return render_template('profile/update.html',form = form)

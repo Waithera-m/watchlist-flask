@@ -17,3 +17,11 @@ class ReviewForm(FlaskForm):
     title = StringField('Review title', validators=[Required()])
     review = TextAreaField('Movie review', validators=[Required()])
     submit = SubmitField('Submit')
+
+class UpdateProfile(FlaskForm):
+
+    '''
+    Class facilitates the creation of profile objects
+    '''
+    bio = TextAreaField('So tell us everything...',validators = [Required()])
+    submit = SubmitField('Add Bio')
