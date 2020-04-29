@@ -35,7 +35,7 @@
             <form action="/user/{{user.username}}/upload/pic" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <input type="file" name="photo" class="form-control" required>
-                <input class="button button-dark" type="submit">
+                <input style="color:black; margin-top: 2px;" type="submit">
             </form>
             {% endif %}
         </div>
