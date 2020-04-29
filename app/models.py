@@ -90,6 +90,8 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255),unique = True,index = True)
     #create connection between roles and users
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    bio = db.Column(db.String(255))
+    profile_pic_path =  db.Column(db.String())
     #a Foreign key is a field in one table that references a primary key in another table
     pass_secure = db.Column(db.String(255))
     #pasword column
