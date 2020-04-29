@@ -5,8 +5,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet,configure_uploads,IMAGES
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager
+from flask_mail import Mail
 
 csrf = CSRFProtect()
+mail = Mail()
 
 #flask_login facilitates user authentication system management
 
@@ -39,7 +41,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
-
+    mail.init_app(app)
     csrf.init_app(app)
 
     #register blueprint
