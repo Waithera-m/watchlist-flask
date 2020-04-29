@@ -1,5 +1,6 @@
 import os
 #module allows the app to interface with the underlying os, in this case, linux
+from werkzeug.utils import secure_filename
 
 class Config:
     '''
