@@ -10,6 +10,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     P_KEY = os.environ.get('P_KEY')
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mary:pixie01@localhost/watchlist'
+    UPLOADED_PHOTOS_DEST = 'app/static/photos'
     #os.environ function gets users environment
 
 
