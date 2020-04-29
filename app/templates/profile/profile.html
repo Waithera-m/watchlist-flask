@@ -1,20 +1,14 @@
 {% extends 'base.html' %}
 
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='CSS/movie.css')}}">
+{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row">
-    <!-- displaying  Username-->
-        <div class="col-md-4">
-            <h3> {{user.username| capitalize}} </h3>
-
-            <!--Displaying user bio-->
-            {% if user.bio %}
-            <p> {{user.bio}}</p>
-            {%else%}
-            <p> {{user.username| capitalize}} has no bio </p>
-            {% endif %}
-        </div>
+    
 
         <!--Display profile photo-->
         <div class="col-md-4">
@@ -25,13 +19,27 @@
             <p>No profile picture</p>
             {% endif %}
         </div>
+        <!-- displaying  Username-->
+        <div class="col-md-4">
+            <h3> {{user.username| capitalize}} </h3>
+
+            <!--Displaying user bio-->
+            {% if user.bio %}
+            <p> {{user.bio}}</p>
+            {%else%}
+            <p> {{user.username| capitalize}} has no bio </p>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            {% if user == current_user %}
+            <form action="/user/{{user.username}}/upload/pic" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <input type="file" name="photo" class="form-control" required>
+                <input class="button button-dark" type="submit">
+            </form>
+            {% endif %}
+        </div>
     </div>
-    {% if user == current_user %}
-    <form action="{{url_for('main.update_profile',uname=user.username)}}" method="post" enctype="multipart/form-data">
-           
-        <input type="file" name="photo" class="form-control" required>
-        <input type="submit">
-    </form>
-    {% endif %}
+    
 </div>
 {% endblock %}

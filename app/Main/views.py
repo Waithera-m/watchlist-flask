@@ -135,15 +135,36 @@ def update_profile(uname):
 def update_pic(uname):
 
     '''
-    view function processes form submission request
+    View function processes form submission request and updates users profile photo
     '''
-    form = UploadFile()
+    # form = UploadFile()
 
     user = User.query.filter_by(username=uname).first()
+    
+    
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
         user.profile_pic_path = path
+        
         db.session.commit()
         
-    return redirecturl_for('main.profile',uname=uname,form=form)
+        
+    return redirect (url_for('main.profile',uname=uname))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
