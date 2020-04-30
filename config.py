@@ -9,8 +9,8 @@ class Config:
     MOVIE_API_BASE_URL = 'https://api.themoviedb.org/3/movie/{}?api_key={}'
     MOVIE_API_KEY = os.environ.get('MOVIE_API_KEY')
     SECRET_KEY = os.environ.get('SECRET_KEY') or "the world is dead and so are you"
-    print(SECRET_KEY)
-    print('hi')
+    # print(SECRET_KEY)
+    # print('hi')
     P_KEY = os.environ.get('P_KEY')
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mary:pixie01@localhost/watchlist'
     UPLOADED_PHOTOS_DEST = 'app/static/photos'
