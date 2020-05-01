@@ -5,7 +5,7 @@ from flask_migrate import Migrate, MigrateCommand
 # Manager class from flask-script that will initialize the extension and the Server class will launch the server.
 
 #call function and pass configuration_options development key
-app = create_app('development')
+app = create_app('production')
 
 #initialize manager and pass app instance: create command line to dictate how the application will be run
 manager = Manager(app)
