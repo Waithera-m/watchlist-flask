@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, abort
-from flask_login import login_required
+from flask_login import login_required,current_user
 #import blueprint
 from . import main
 
@@ -10,6 +10,7 @@ from ..request import get_movies, get_movie, search_movie
 #import Review and ReviewForm classes
 from ..models import Review,User
 from .forms import ReviewForm,UpdateProfile,UploadFile
+import markdown2
 
 Review = Review
 
@@ -86,7 +87,7 @@ def new_review(id):
     if form.validate_on_submit():
         title = form.title.data
         review = form.review.data
-        new_review = Review(moview_id=movie.id,movie_title=title,image_path=movie.poster,movie_review=review,user=current_user)
+        new_review = Review(movie_id=movie.id,movie_title=title,image_path=movie.poster,movie_review=review,user=current_user)
         new_review.save_review()
         return redirect(url_for('main.movie',id = movie.id ))
 
@@ -151,6 +152,18 @@ def update_pic(uname):
         
         
     return redirect (url_for('main.profile',uname=uname))
+
+@main.route('/review/<int:id>')
+def single_review(id):
+
+    '''
+    View function returns transformed markdwon textarea
+    '''
+    review = Review.query.get(id)
+    if review is None:
+        abort(404)
+    format_review = markdown2.markdown(review.movie_review,extras=["code-friendly","fenced-code-blocks"])
+    return render_template('review.html',review = review,format_review = format_review)
 
 
 

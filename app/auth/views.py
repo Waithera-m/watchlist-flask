@@ -14,12 +14,15 @@ def login():
     '''
     login_form = LoginForm()
     if login_form.validate_on_submit():
+        print('huh')
         user = User.query.filter_by(email = login_form.email.data).first()
+        print(user)
         if user is not None and user.verify_password(login_form.password.data):
+            print('huh2')
             login_user(user,login_form.remember.data)
             return redirect(request.args.get('next') or url_for('main.index'))
-
-        flash('Invalid username or Password')
+        else:
+            flash('Invalid username or Password')
 
     title = "watchlist login"
     return render_template('auth/login.html', login_form = login_form,title=title)
