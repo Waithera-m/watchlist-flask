@@ -12,7 +12,7 @@ class Config:
     # print(SECRET_KEY)
     # print('hi')
     P_KEY = os.environ.get('P_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mary:pixie01@localhost/watchlist'
+    
     UPLOADED_PHOTOS_DEST = 'app/static/photos'
     #os.environ function gets users environment
 
@@ -23,6 +23,15 @@ class Config:
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
+
+class TestConfig(Config):
+
+    '''
+    Class inherits general configurations from Config class
+    '''
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mary:pixie01@localhost/watchlist_test'
 
 class ProdConfig(Config):
     '''
@@ -41,11 +50,13 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mary:pixie01@localhost/watchlist'
 
     DEBUG = True
 
 #dictionary to facilitate access to different configuration classes
 config_options = {
     'development': DevConfig,
-    'production': ProdConfig
+    'production': ProdConfig,
+    'test': TestConfig
 }
