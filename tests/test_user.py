@@ -6,7 +6,7 @@ class UserModelTest(unittest.TestCase):
     '''
     Class facilitates the creation of test units to test the User class' behavior
     '''
-    def setUp(Self):
+    def setUp(self):
 
         '''
         Function runs before every test case
